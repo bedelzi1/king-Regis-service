@@ -1,40 +1,47 @@
 document.addEventListener("DOMContentLoaded", () => {
   const body = document.body;
 
-
-  /* =================================
-     LOADER KING SERVICE
-  ================================= */
-
-  body.classList.add("loading");
-
   const loader = document.getElementById("loader");
-  const loaderProgress = document.getElementById("loader-progress");
-  const loaderNumber = document.getElementById("loader-number");
+  const loadProgress = document.getElementById("load-progress");
+  const loadPercent = document.getElementById("load-percent");
 
-  let progress = 0;
+  if (loader && loadProgress && loadPercent) {
+    const startLoading = () => {
+      const startedAt = performance.now();
+      const duration = 3000;
+      loadProgress.value = 0;
+      loadPercent.textContent = "0%";
 
-  if (loader && loaderProgress && loaderNumber) {
-    const loadingAnimation = setInterval(() => {
-      progress += Math.floor(Math.random() * 7) + 3;
+      const intervalId = setInterval(() => {
+        const progress = Math.min(
+          ((performance.now() - startedAt) / duration) * 100,
+          100
+        );
 
-      if (progress >= 100) {
-        progress = 100;
-        clearInterval(loadingAnimation);
+        loadProgress.value = Math.round(progress);
+        loadPercent.textContent = `${Math.round(progress)}%`;
 
+        if (progress < 100) {
+          return;
+        }
+
+        clearInterval(intervalId);
+        loader.classList.add("complete");
         setTimeout(() => {
-          loader.classList.add("hidden");
-          body.classList.remove("loading");
-        }, 650);
-      }
+          body.classList.add("page-loaded");
+          loader.remove();
+        }, 350);
+      }, 50);
+    };
 
-      loaderProgress.style.width = `${progress}%`;
-      loaderNumber.textContent = progress;
-    }, 70);
+    if (document.readyState === "complete") {
+      startLoading();
+    } else {
+      window.addEventListener("load", startLoading, { once: true });
+    }
   } else {
-    body.classList.remove("loading");
+    body.classList.add("page-loaded");
   }
-
 
   /* =================================
      NAVIGATION FIXE
@@ -81,100 +88,12 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =================================
-     RÉVÉLATION AU DÉFILEMENT
-  ================================= */
-
-  const revealElements = document.querySelectorAll(".reveal");
-
-  if ("IntersectionObserver" in window) {
-    const revealObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (!entry.isIntersecting) {
-            return;
-          }
-
-          entry.target.classList.add("visible");
-          observer.unobserve(entry.target);
-        });
-      },
-      {
-        threshold: 0.12,
-        rootMargin: "0px 0px -45px 0px"
-      }
-    );
-
-    revealElements.forEach((element, index) => {
-      element.style.transitionDelay = `${Math.min(index % 4, 3) * 90}ms`;
-      revealObserver.observe(element);
-    });
-  } else {
-    revealElements.forEach((element) => {
-      element.classList.add("visible");
-    });
-  }
-
-
-  /* =================================
-     COMPTEURS DES DOMAINES
-  ================================= */
-
-  const statNumbers = document.querySelectorAll(".stat-item strong");
-
-  const animateNumber = (element) => {
-    const finalNumber = Number(element.textContent.trim());
-
-    if (Number.isNaN(finalNumber) || finalNumber === 0) {
-      return;
-    }
-
-    const duration = 900;
-    const startTime = performance.now();
-
-    const updateNumber = (currentTime) => {
-      const elapsed = currentTime - startTime;
-      const progressValue = Math.min(elapsed / duration, 1);
-      const easeOut = 1 - Math.pow(1 - progressValue, 3);
-
-      element.textContent = String(
-        Math.floor(easeOut * finalNumber)
-      ).padStart(2, "0");
-
-      if (progressValue < 1) {
-        requestAnimationFrame(updateNumber);
-      } else {
-        element.textContent = String(finalNumber).padStart(2, "0");
-      }
-    };
-
-    requestAnimationFrame(updateNumber);
-  };
-
-  if ("IntersectionObserver" in window) {
-    const statsObserver = new IntersectionObserver(
-      (entries, observer) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            animateNumber(entry.target);
-            observer.unobserve(entry.target);
-          }
-        });
-      },
-      { threshold: 0.7 }
-    );
-
-    statNumbers.forEach((number) => {
-      statsObserver.observe(number);
-    });
-  }
-
-
-  /* =================================
      FILTRES DES RÉALISATIONS
   ================================= */
 
   const filterButtons = document.querySelectorAll(".filter-button");
   const projectCards = document.querySelectorAll(".project-card");
+  const emptyProjectsMessage = document.getElementById("projects-empty-state");
 
   filterButtons.forEach((button) => {
     button.addEventListener("click", () => {
@@ -182,9 +101,11 @@ document.addEventListener("DOMContentLoaded", () => {
 
       filterButtons.forEach((item) => {
         item.classList.remove("active");
+        item.setAttribute("aria-pressed", "false");
       });
 
       button.classList.add("active");
+      button.setAttribute("aria-pressed", "true");
 
       projectCards.forEach((card) => {
         const cardCategory = card.dataset.category;
@@ -195,25 +116,14 @@ document.addEventListener("DOMContentLoaded", () => {
 
         card.classList.toggle("hide", !shouldShow);
 
-        if (shouldShow) {
-          card.animate(
-            [
-              {
-                opacity: 0,
-                transform: "translateY(25px)"
-              },
-              {
-                opacity: 1,
-                transform: "translateY(0)"
-              }
-            ],
-            {
-              duration: 450,
-              easing: "cubic-bezier(0.22, 1, 0.36, 1)"
-            }
-          );
-        }
       });
+
+      if (emptyProjectsMessage) {
+        const hasVisibleProjects = Array.from(projectCards).some(
+          (card) => !card.classList.contains("hide")
+        );
+        emptyProjectsMessage.hidden = hasVisibleProjects;
+      }
     });
   });
 
@@ -300,124 +210,51 @@ document.addEventListener("DOMContentLoaded", () => {
 
 
   /* =================================
-     CARTE 3D ET PARALLAXE DU HERO
-  ================================= */
-
-  const hero = document.querySelector(".hero");
-  const lightOne = document.querySelector(".light-one");
-  const lightTwo = document.querySelector(".light-two");
-  const circleOne = document.querySelector(".circle-one");
-  const circleTwo = document.querySelector(".circle-two");
-
-  if (hero && heroCard && window.innerWidth > 700) {
-    let animationFrame;
-
-    hero.addEventListener("mousemove", (event) => {
-      cancelAnimationFrame(animationFrame);
-
-      animationFrame = requestAnimationFrame(() => {
-        const rect = hero.getBoundingClientRect();
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-        heroCard.style.transform = `
-          rotateY(${x * 10}deg)
-          rotateX(${y * -8}deg)
-          rotateZ(3deg)
-          translateY(-7px)
-        `;
-
-        if (lightOne) {
-          lightOne.style.transform = `translate(${x * 28}px, ${y * 28}px)`;
-        }
-
-        if (lightTwo) {
-          lightTwo.style.transform = `translate(${x * -28}px, ${y * -28}px)`;
-        }
-
-        if (circleOne) {
-          circleOne.style.transform = `translate(${x * 12}px, ${y * 12}px)`;
-        }
-
-        if (circleTwo) {
-          circleTwo.style.transform = `translate(${x * -15}px, ${y * -15}px)`;
-        }
-      });
-    });
-
-    hero.addEventListener("mouseleave", () => {
-      heroCard.style.transform = "rotate(5deg)";
-
-      if (lightOne) {
-        lightOne.style.transform = "";
-      }
-
-      if (lightTwo) {
-        lightTwo.style.transform = "";
-      }
-
-      if (circleOne) {
-        circleOne.style.transform = "";
-      }
-
-      if (circleTwo) {
-        circleTwo.style.transform = "";
-      }
-    });
-  }
-
-
-  /* =================================
-     EFFET 3D SUR LES PROJETS
-  ================================= */
-
-  const projectImages = document.querySelectorAll(".project-image");
-
-  if (window.innerWidth > 700) {
-    projectImages.forEach((projectImage) => {
-      projectImage.addEventListener("mousemove", (event) => {
-        const rect = projectImage.getBoundingClientRect();
-
-        const x = (event.clientX - rect.left) / rect.width - 0.5;
-        const y = (event.clientY - rect.top) / rect.height - 0.5;
-
-        projectImage.style.transform = `
-          perspective(900px)
-          rotateY(${x * 3.5}deg)
-          rotateX(${y * -3.5}deg)
-          translateY(-8px)
-        `;
-      });
-
-      projectImage.addEventListener("mouseleave", () => {
-        projectImage.style.transform = "";
-      });
-    });
-  }
-
-
-  /* =================================
-     FORMULAIRE — PRÉPARATION EMAIL
+    FORMULAIRE : PRÉPARATION EMAIL
   ================================= */
 
   const auditForm = document.getElementById("audit-form");
   const formSuccess = document.getElementById("form-success");
 
   if (auditForm) {
+    const emailInput = document.getElementById("email");
+    const whatsappPhone = document.getElementById("whatsapp-phone");
+    const emailGroup = document.getElementById("email-group");
+    const whatsappGroup = document.getElementById("whatsapp-group");
+    const contactMethodInputs = auditForm.querySelectorAll(
+      'input[name="contact-method"]'
+    );
+
+    const updateContactMethod = () => {
+      const selectedMethod = auditForm.querySelector(
+        'input[name="contact-method"]:checked'
+      )?.value;
+      const useWhatsApp = selectedMethod === "whatsapp";
+
+      emailGroup.hidden = useWhatsApp;
+      emailInput.required = !useWhatsApp;
+      whatsappGroup.hidden = !useWhatsApp;
+      whatsappPhone.required = useWhatsApp;
+    };
+
+    contactMethodInputs.forEach((input) => {
+      input.addEventListener("change", updateContactMethod);
+    });
+    updateContactMethod();
+
+    whatsappPhone.addEventListener("input", () => {
+      whatsappPhone.setCustomValidity("");
+    });
+
     auditForm.addEventListener("submit", (event) => {
       event.preventDefault();
 
       const name =
         document.getElementById("name")?.value.trim();
 
-      const email =
-        document.getElementById("email")?.value.trim();
-
-      const countryCode =
-        document.getElementById("country-code")?.value;
-
-      const phone =
-        document.getElementById("phone")?.value.trim();
+      const contactMethod = auditForm.querySelector(
+        'input[name="contact-method"]:checked'
+      )?.value;
 
       const objectiveElement =
         document.getElementById("objective");
@@ -427,9 +264,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
       if (
         !name ||
-        !email ||
-        !countryCode ||
-        !phone ||
         !objectiveElement ||
         !objectiveElement.value ||
         !message
@@ -444,20 +278,36 @@ document.addEventListener("DOMContentLoaded", () => {
         ].text;
 
       const subject = encodeURIComponent(
-        `Nouvelle demande King Service — ${objectiveText}`
+        `Nouvelle demande King Service | ${objectiveText}`
       );
 
-      const emailBody = encodeURIComponent(
+      let contactDetails;
+      let destination;
+
+      if (contactMethod === "whatsapp") {
+        const whatsappDigits = whatsappPhone.value.replace(/\D/g, "");
+
+        if (!/^[1-9]\d{7,14}$/.test(whatsappDigits)) {
+          whatsappPhone.setCustomValidity(
+            "Entrez un numéro avec indicatif international, par exemple +225 07 00 00 00 00."
+          );
+          whatsappPhone.reportValidity();
+          return;
+        }
+
+        contactDetails = `WhatsApp du demandeur : +${whatsappDigits}`;
+      } else {
+        const email = emailInput.value.trim();
+        contactDetails = `E-mail du demandeur : ${email}`;
+      }
+
+      const messageBody =
         `Bonjour King Service,
 
 Nom ou entreprise :
 ${name}
 
-Email :
-${email}
-
-Téléphone :
-${countryCode} ${phone}
+${contactDetails}
 
 Objectif principal :
 ${objectiveText}
@@ -465,21 +315,29 @@ ${objectiveText}
 Description du projet et impact attendu :
 ${message}
 
-Merci.`
-      );
+Merci.`;
 
-      const mailtoLink =
-        "mailto:bedelzijeanregis@gmail.com" +
-        `?subject=${subject}` +
-        `&body=${emailBody}`;
+      if (contactMethod === "whatsapp") {
+        const whatsappUrl = new URL("https://wa.me/2250564782099");
+        whatsappUrl.searchParams.set("text", messageBody);
+        destination = whatsappUrl.toString();
+      } else {
+        const gmailUrl = new URL("https://mail.google.com/mail/");
+        gmailUrl.searchParams.set("view", "cm");
+        gmailUrl.searchParams.set("fs", "1");
+        gmailUrl.searchParams.set("to", "bedelzijeanregis@gmail.com");
+        gmailUrl.searchParams.set("su", decodeURIComponent(subject));
+        gmailUrl.searchParams.set("body", messageBody);
+        destination = gmailUrl.toString();
+      }
 
       if (formSuccess) {
         formSuccess.textContent =
-          "Votre demande est prête à être envoyée depuis votre messagerie.";
+          "Votre demande est prête dans l'application choisie. Confirmez son envoi.";
         formSuccess.classList.add("show");
       }
 
-      window.location.href = mailtoLink;
+      window.location.href = destination;
     });
   }
 
@@ -488,15 +346,9 @@ Merci.`
      ANNÉE AUTOMATIQUE DU FOOTER
   ================================= */
 
-  const footerParagraphs = document.querySelectorAll(".footer p");
-
-  const footerYear = Array.from(footerParagraphs).find(
-    (paragraph) => paragraph.textContent.includes("2026")
-  );
-
+  const footerYear = document.getElementById("footer-year");
   if (footerYear) {
-    footerYear.textContent =
-      `© ${new Date().getFullYear()} King Service. Tous droits réservés.`;
+    footerYear.textContent = String(new Date().getFullYear());
   }
 
 });

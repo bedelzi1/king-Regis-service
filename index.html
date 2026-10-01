@@ -3,65 +3,40 @@
 
 <head>
   <link rel="icon" type="image/png" href="images/favicon.png">
-  <meta property="og:title" content="King Service — Graphiste & Développeur web">
+  <meta property="og:title" content="King Service | Développement web et design graphique">
 
 <meta
   property="og:description"
-  content="Branding, design graphique, création de contenu et développement web."
+  content="Développement web, design graphique et création de contenu à Abidjan."
 >
 
-<meta property="og:image" content="images/photo-profil.png">
+<meta property="og:image" content="images/profil.jpg">
 
 <meta property="og:type" content="website">
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-  <title>King Service — Graphiste, Designer digital & Développeur web</title>
+  <title>King Service | Développement web et design graphique à Abidjan</title>
 
   <meta
     name="description"
-    content="King Service accompagne les marques et projets avec le branding, le design graphique, la création de contenu, le marketing digital et le développement web."
+    content="Kouassi Bedelzi Regis propose des services de développement web, de design graphique et de création de contenu à Abidjan."
   >
 
+  <script>document.documentElement.classList.add("js");</script>
   <link rel="stylesheet" href="style.css">
 </head>
 
 <body>
 
-  <!-- ================================
-       ÉCRAN DE CHARGEMENT
-  ================================= -->
-
-  <div class="loader" id="loader" aria-hidden="true">
-
+  <div class="loader" id="loader" role="status" aria-live="polite">
     <div class="loader-content">
-
-      <div class="loader-crown">♛</div>
-
-      <div class="loader-logo">
-        KS
-      </div>
-
-      <p class="loader-title">
-        Chargement de la créativité...
-      </p>
-
-      <div class="loader-bar">
-        <span id="loader-progress"></span>
-      </div>
-
-      <p class="loader-percent">
-        <span id="loader-number">0</span> %
-      </p>
-
-      <p class="loader-message">
-        Patientez, le talent arrive.
-      </p>
-
+      <span class="loader-mark" aria-hidden="true">KS</span>
+      <p>Chargement du portfolio</p>
+      <progress id="load-progress" max="100" aria-label="Chargement du portfolio"></progress>
+      <span id="load-percent">En cours</span>
     </div>
-
   </div>
-
 
   <!-- ================================
        NAVIGATION
@@ -103,10 +78,6 @@
         </li>
 
         <li>
-          <a href="#vision">Vision</a>
-        </li>
-
-        <li>
           <a
             href="https://dhwdumfv.mychariow.shop/"
             target="_blank"
@@ -123,7 +94,7 @@
       </ul>
 
       <a href="#contact" class="nav-button">
-        Travailler ensemble
+        Démarrer un projet
       </a>
 
     </nav>
@@ -139,38 +110,26 @@
 
     <section class="hero" id="home">
 
-      <div class="hero-background" aria-hidden="true">
-        <span class="hero-light light-one"></span>
-        <span class="hero-light light-two"></span>
-        <span class="hero-circle circle-one"></span>
-        <span class="hero-circle circle-two"></span>
-      </div>
-
       <div class="hero-container container">
 
         <div class="hero-content reveal">
 
-          <p class="eyebrow">
-            DISPONIBLE POUR DE NOUVEAUX PROJETS
-          </p>
+          <p class="eyebrow">DÉVELOPPEMENT WEB · DESIGN GRAPHIQUE</p>
 
           <h1>
-            Je transforme les idées,
-            les marques et le digital
-            <span>en impact visuel.</span>
+            Développeur web
+            <span>& graphiste.</span>
           </h1>
 
           <p class="hero-description">
-            Graphiste, designer digital et développeur web basé à Abidjan.
-            Je crée des identités visuelles, des supports de communication,
-            des contenus digitaux et des expériences web modernes pour aider
-            les projets à gagner en visibilité, en cohérence et en crédibilité.
+            Basé à Abidjan, je réalise des sites web, des identités visuelles
+            et des contenus numériques.
           </p>
 
           <div class="hero-actions">
 
-            <a href="#projects" class="button button-gold">
-              Voir mes réalisations
+            <a href="#contact" class="button button-gold">
+              Démarrer un projet
               <span>↗</span>
             </a>
 
@@ -180,21 +139,20 @@
               rel="noopener noreferrer"
               class="button button-outline"
             >
-              Mes formations
+              Voir les formations
             </a>
 
-            <a href="#contact" class="hero-text-button">
-              Travailler avec moi
+            <a href="#expertise" class="hero-text-button">
+              Voir les expertises
               <span>↗</span>
             </a>
 
           </div>
 
           <div class="hero-tags">
-            <span>Branding</span>
-            <span>Design graphique</span>
-            <span>Création de contenu</span>
+            <span>HTML · CSS · JavaScript</span>
             <span>Web design</span>
+            <span>Identité visuelle</span>
           </div>
 
         </div>
@@ -202,14 +160,11 @@
 
         <div class="hero-visual reveal">
 
-          <div class="visual-orbit orbit-one"></div>
-          <div class="visual-orbit orbit-two"></div>
-
           <div class="hero-card has-profile-photo">
 
             <div class="card-top">
               <span>KS</span>
-              <span>CREATIVE STUDIO</span>
+                <span>NONCHALANT</span>
             </div>
 
             <img
@@ -223,28 +178,15 @@
             </div>
 
             <div class="card-bottom">
-              <span>EST. 2026</span>
+              <span>KING SERVICE</span>
               <span>ABIDJAN, CI</span>
             </div>
 
           </div>
 
-          <div class="floating-word word-one">
-            CREATE
-          </div>
-
-          <div class="floating-word word-two">
-            IMPACT
-          </div>
-
         </div>
 
       </div>
-
-      <a href="#about" class="scroll-indicator" aria-label="Découvrir mon parcours">
-        <span></span>
-        Faites défiler
-      </a>
 
     </section>
 
@@ -256,6 +198,7 @@
     <section class="marquee-section" aria-label="Domaines de King Service">
 
       <div class="marquee">
+        <div class="marquee-track">
 
         <span>IDENTITÉ VISUELLE</span>
         <i>✦</i>
@@ -275,16 +218,16 @@
         <span>MARKETING DIGITAL</span>
         <i>✦</i>
 
-        <span>IDENTITÉ VISUELLE</span>
-        <i>✦</i>
+        </div>
 
-        <span>DESIGN GRAPHIQUE</span>
-        <i>✦</i>
-
-        <span>CRÉATION DE CONTENU</span>
-        <i>✦</i>
-
-        <span>WEB DESIGN</span>
+        <div class="marquee-track" aria-hidden="true">
+          <span>IDENTITÉ VISUELLE</span><i>✦</i>
+          <span>DESIGN GRAPHIQUE</span><i>✦</i>
+          <span>CRÉATION DE CONTENU</span><i>✦</i>
+          <span>WEB DESIGN</span><i>✦</i>
+          <span>DÉVELOPPEMENT WEB</span><i>✦</i>
+          <span>MARKETING DIGITAL</span><i>✦</i>
+        </div>
 
       </div>
 
@@ -301,14 +244,9 @@
 
         <div class="section-intro reveal">
 
-          <p class="eyebrow">
-            À PROPOS DE KING SERVICE
-          </p>
+          <p class="eyebrow">À PROPOS DE KING SERVICE</p>
 
-          <h2>
-            Un parcours guidé
-            <span>par la création.</span>
-          </h2>
+          <h2>Un parcours guidé <span>par la création.</span></h2>
 
         </div>
 
@@ -353,8 +291,8 @@
           <div>
             <h3>Graphisme & identité visuelle</h3>
             <p>
-              Création de logos, flyers, affiches et visuels
-              pensés pour donner une image professionnelle aux projets.
+              Création de logos, flyers, affiches et visuels pour différents
+              supports de communication.
             </p>
           </div>
 
@@ -395,8 +333,8 @@
           <div>
             <h3>Une vision créative en construction</h3>
             <p>
-              Développer un studio moderne qui aide les marques et créateurs
-              à mieux communiquer, mieux se présenter et mieux vendre.
+              King Service réunit des activités de graphisme, de création
+              de contenu et de développement web.
             </p>
           </div>
 
@@ -421,35 +359,30 @@
           </p>
 
           <p>
-            Des créations pensées pour construire une présence
-            visuelle et digitale cohérente.
+            Branding, design graphique, contenu digital et réalisation web.
           </p>
         </div>
 
         <div class="stats-grid">
 
           <div class="stat-item reveal">
-            <strong>01</strong>
-            <span>Branding</span>
-            <p>Une identité reconnaissable.</p>
+            <strong>Branding</strong>
+            <p>Identité visuelle et éléments de marque.</p>
           </div>
 
           <div class="stat-item reveal">
-            <strong>02</strong>
-            <span>Design graphique</span>
-            <p>Des visuels qui communiquent.</p>
+            <strong>Design graphique</strong>
+            <p>Logos, flyers et affiches.</p>
           </div>
 
           <div class="stat-item reveal">
-            <strong>03</strong>
-            <span>Contenu digital</span>
-            <p>Des idées conçues pour capter.</p>
+            <strong>Contenu digital</strong>
+            <p>Visuels et contenus pour les réseaux sociaux.</p>
           </div>
 
           <div class="stat-item reveal">
-            <strong>04</strong>
-            <span>Expériences web</span>
-            <p>Une présence moderne en ligne.</p>
+            <strong>Web design</strong>
+            <p>Maquettes et pages web.</p>
           </div>
 
         </div>
@@ -472,48 +405,53 @@
           <div>
 
             <p class="eyebrow">
-              PROJETS SÉLECTIONNÉS
+              RÉALISATIONS
             </p>
 
             <h2>
-              Des créations pensées
-              <span>pour marquer.</span>
+              Projets graphiques
+                <span>et interfaces web.</span>
             </h2>
 
           </div>
 
           <p class="section-description">
-            Une sélection de projets graphiques et digitaux.
-            Chaque réalisation est conçue avec une attention portée
-            au message, à la cohérence et à l'impact visuel.
+            Parcourez mes réalisations par domaine de création.
           </p>
 
         </div>
 
-
         <div class="project-filters reveal">
 
-          <button class="filter-button active" type="button" data-filter="all">
-            Tous
+          <button class="filter-button active" type="button" data-filter="all" aria-pressed="true">
+            Tous les projets
           </button>
 
-          <button class="filter-button" type="button" data-filter="branding">
-            Branding
+          <button class="filter-button" type="button" data-filter="branding" aria-pressed="false">
+            01 <span>Identité visuelle</span>
           </button>
 
-          <button class="filter-button" type="button" data-filter="flyers">
-            Flyers
+          <button class="filter-button" type="button" data-filter="flyers" aria-pressed="false">
+            02 <span>Flyers</span>
           </button>
 
-          <button class="filter-button" type="button" data-filter="affiches">
-            Affiches
+          <button class="filter-button" type="button" data-filter="affiches" aria-pressed="false">
+            03 <span>Affiches</span>
           </button>
 
-          <button class="filter-button" type="button" data-filter="web">
-            Web design
+          <button class="filter-button" type="button" data-filter="web" aria-pressed="false">
+            04 <span>Web design</span>
+          </button>
+
+          <button class="filter-button" type="button" data-filter="motion" aria-pressed="false">
+            05 <span>Motion design</span>
           </button>
 
         </div>
+
+        <p class="project-empty-state" id="projects-empty-state" role="status" hidden>
+          Aucune réalisation Motion design publiée pour le moment.
+        </p>
 
 
         <div class="projects-grid">
@@ -539,8 +477,7 @@
             </div>
 
             <p class="project-summary">
-              Univers visuel conçu pour rendre une marque plus claire,
-              plus reconnaissable et plus professionnelle.
+              Projet de création d'identité visuelle pour une marque.
             </p>
 
           </article>
@@ -565,8 +502,7 @@
             </div>
 
             <p class="project-summary">
-              Création d'un symbole visuel mémorable adapté à une activité
-              ou une marque en développement.
+              Projet de création de logo pour une activité ou une marque.
             </p>
 
           </article>
@@ -603,7 +539,7 @@
             <div class="project-image">
               <img
                 src="images/logos/logo-04.png"
-                alt="Création de logo premium"
+                alt="Création de logo"
               >
 
               <button class="view-project" type="button">
@@ -612,13 +548,12 @@
             </div>
 
             <div class="project-details">
-              <span>Branding · Premium</span>
-              <h3>Logo premium</h3>
+              <span>Branding · Logo</span>
+              <h3>Projet de logo</h3>
             </div>
 
             <p class="project-summary">
-              Une identité visuelle élégante pensée pour inspirer confiance
-              et valoriser l'image de marque.
+              Création de logo et éléments d'identité visuelle.
             </p>
 
           </article>
@@ -855,8 +790,7 @@
             </div>
 
             <p class="project-summary">
-              Visuel conçu pour attirer l'attention et mettre une marque,
-              un service ou une offre en avant.
+              Affiche présentant une marque, un service ou une offre.
             </p>
 
           </article>
@@ -1065,19 +999,18 @@
           <div>
 
             <p class="eyebrow">
-              MES TERRAINS
+              EXPERTISES
             </p>
 
             <h2>
-              Ce que je construis
-              <span>au quotidien.</span>
+              Web, design
+              <span>et contenu.</span>
             </h2>
 
           </div>
 
           <p class="section-description">
-            Une approche créative et digitale pour aider les projets
-            à mieux communiquer et à construire leur présence en ligne.
+            Services proposés par King Service.
           </p>
 
         </div>
@@ -1107,8 +1040,8 @@
             <div>
               <h3>Design graphique</h3>
               <p>
-                Flyers, affiches, supports publicitaires et créations visuelles
-                destinées à transmettre un message avec impact.
+                Flyers, affiches, supports publicitaires et autres créations
+                graphiques.
               </p>
             </div>
 
@@ -1123,8 +1056,8 @@
             <div>
               <h3>Création de contenu</h3>
               <p>
-                Visuels, idées de vidéos, scripts, montage et voix-off
-                pour développer une présence active sur les réseaux sociaux.
+                Visuels, scripts, montage et voix-off pour des publications
+                sur les réseaux sociaux.
               </p>
             </div>
 
@@ -1164,6 +1097,22 @@
 
           </article>
 
+          <article class="expertise-item reveal">
+
+            <span class="expertise-number">06</span>
+
+            <div>
+              <h3>Motion design</h3>
+              <p>
+                Animation de textes, de formes et d’éléments graphiques
+                pour des contenus numériques.
+              </p>
+            </div>
+
+            <span class="expertise-arrow">↗</span>
+
+          </article>
+
         </div>
 
       </div>
@@ -1182,12 +1131,12 @@
         <div class="section-intro reveal">
 
           <p class="eyebrow">
-            ÉCOSYSTÈME DE TRAVAIL
+            TECHNOLOGIES & OUTILS
           </p>
 
           <h2>
-            Les outils qui donnent
-            <span>vie aux idées.</span>
+            Outils de création
+            <span>et développement.</span>
           </h2>
 
         </div>
@@ -1207,6 +1156,7 @@
             <span>VS Code</span>
             <span>Design responsive</span>
             <span>Design graphique</span>
+            <span>Motion design</span>
             <span>Montage vidéo</span>
             <span>Création de contenu</span>
             <span>Marketing digital</span>
@@ -1216,7 +1166,7 @@
           </div>
 
           <p class="tools-note">
-            Créativité · Design · Digital · Web
+            HTML · CSS · JavaScript · Design graphique
           </p>
 
         </div>
@@ -1294,18 +1244,14 @@
             FORMATIONS & RESSOURCES
           </p>
 
-          <h2>
-            Apprenez.
-            <span>Créez. Progressez.</span>
-          </h2>
+          <h2>Formations <span>& Academy.</span></h2>
 
         </div>
 
         <div class="formations-content reveal">
 
           <p>
-            Retrouvez mes ressources et formations autour du design,
-            du digital, de la création de contenu et du développement web.
+            Consultez les formations disponibles sur ma plateforme externe.
           </p>
 
           <a
@@ -1477,8 +1423,8 @@
           </p>
 
           <h2>
-            Donnons une image forte
-            <span>à votre prochain projet.</span>
+            Présentez-moi votre
+            <span>projet graphique ou web.</span>
           </h2>
 
           <p>
@@ -1497,36 +1443,16 @@
 
             </a>
 
-            <a href="tel:+225">
-
+            <a href="tel:+2250564782099">
               <span>Téléphone</span>
-
-              Indisponible pour le moment
-
+              +225 05 64 78 20 99
             </a>
 
-            <a
-              href="https://wa.me/225"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-
-              <span>WhatsApp prioritaire</span>
-
-              Indisponible pour le moment
-
+            <a href="https://wa.me/2250564782099" target="_blank" rel="noopener noreferrer">
+              <span>WhatsApp</span>
+              Écrire au +225 05 64 78 20 99
             </a>
 
-          </div>
-
-          <div class="contact-note">
-            <span>✦</span>
-            RÉPONSE GARANTIE SOUS 24 HEURES
-          </div>
-
-          <div class="contact-note">
-            <span>✦</span>
-            DÉBUT IMMÉDIAT EN CAS D'ACCORD
           </div>
 
         </div>
@@ -1552,10 +1478,24 @@
           </div>
 
 
-          <div class="form-group">
+          <fieldset class="form-group contact-method">
+            <legend>Où souhaitez-vous poursuivre la demande ?</legend>
+            <div class="contact-method-options">
+              <label>
+                <input type="radio" name="contact-method" value="email" checked>
+                E-mail
+              </label>
+              <label>
+                <input type="radio" name="contact-method" value="whatsapp">
+                WhatsApp
+              </label>
+            </div>
+          </fieldset>
+
+          <div class="form-group" id="email-group">
 
             <label for="email">
-              Email de contact
+              Adresse e-mail
             </label>
 
             <input
@@ -1570,48 +1510,20 @@
           </div>
 
 
-          <div class="form-group">
+          <div class="form-group" id="whatsapp-group" hidden>
 
-            <label for="phone">
-              Numéro de téléphone
+            <label for="whatsapp-phone">
+              Numéro WhatsApp avec indicatif international
             </label>
 
-            <div class="phone-group">
-
-              <select id="country-code" name="country-code" aria-label="Indicatif pays" required>
-                <option value="+225" selected>🇨🇮 +225</option>
-                <option value="+226">🇧🇫 +226</option>
-                <option value="+221">🇸🇳 +221</option>
-                <option value="+223">🇲🇱 +223</option>
-                <option value="+224">🇬🇳 +224</option>
-                <option value="+228">🇹🇬 +228</option>
-                <option value="+229">🇧🇯 +229</option>
-                <option value="+227">🇳🇪 +227</option>
-                <option value="+237">🇨🇲 +237</option>
-                <option value="+241">🇬🇦 +241</option>
-                <option value="+242">🇨🇬 +242</option>
-                <option value="+243">🇨🇩 +243</option>
-                <option value="+212">🇲🇦 +212</option>
-                <option value="+213">🇩🇿 +213</option>
-                <option value="+216">🇹🇳 +216</option>
-                <option value="+33">🇫🇷 +33</option>
-                <option value="+32">🇧🇪 +32</option>
-                <option value="+41">🇨🇭 +41</option>
-                <option value="+1">🇨🇦 +1</option>
-                <option value="+44">🇬🇧 +44</option>
-                <option value="+49">🇩🇪 +49</option>
-              </select>
-
-              <input
-                type="tel"
-                id="phone"
-                name="phone"
-                placeholder="Votre numéro"
-                autocomplete="tel"
-                required
-              >
-
-            </div>
+            <input
+              type="tel"
+              id="whatsapp-phone"
+              name="whatsapp-phone"
+              inputmode="tel"
+              autocomplete="tel"
+              placeholder="Ex : +225 07 00 00 00 00"
+            >
 
           </div>
 
@@ -1690,13 +1602,23 @@
           </div>
 
 
+          <div class="form-consent">
+            <input type="checkbox" id="privacy-acknowledgement" required>
+            <label for="privacy-acknowledgement">
+              J'ai pris connaissance de la
+              <a href="politique-confidentialite.html">politique de confidentialité</a>.
+              Ma demande s'ouvrira dans Gmail ou WhatsApp selon mon choix. Je devrai confirmer son envoi dans l'application.
+            </label>
+          </div>
+
+
           <button type="submit" class="button button-gold form-submit">
             Envoyer la demande
             <span>↗</span>
           </button>
 
           <p class="form-success" id="form-success" role="status">
-            Votre demande est prête à être envoyée.
+            Votre demande est prête dans l'application choisie. Confirmez son envoi.
           </p>
 
         </form>
@@ -1720,9 +1642,7 @@
         KING<span>SERVICE</span>
       </a>
 
-      <p>
-        Graphiste · Designer digital · Développeur web
-      </p>
+      <p>Kouassi Bedelzi Regis · Développement web et design graphique · Abidjan</p>
 
       <div class="footer-socials">
 
@@ -1738,18 +1658,18 @@
           Email
         </a>
 
-        <a
-          href="https://wa.me/225"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
+        <a href="https://www.facebook.com/regis.bedelzi.3" target="_blank" rel="noopener noreferrer">
+          Facebook
+        </a>
+
+        <a href="https://wa.me/2250564782099" target="_blank" rel="noopener noreferrer">
           WhatsApp
         </a>
 
       </div>
 
       <p>
-        © 2026 King Service. Tous droits réservés.
+        © <span id="footer-year">2026</span> King Service. Tous droits réservés.
       </p>
 
     </div>
