@@ -8,7 +8,7 @@ document.addEventListener("DOMContentLoaded", () => {
   if (loader && loadProgress && loadPercent) {
     const startLoading = () => {
       const startedAt = performance.now();
-      const duration = 3000;
+      const duration = 1000;
       loadProgress.value = 0;
       loadPercent.textContent = "0%";
 
